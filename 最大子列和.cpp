@@ -35,7 +35,16 @@ int maxsubseqsum2(int A[], int N)
 }
 int maxsubseqsum3(int A[], int N)
 {
-
+    int ThisSum = 0, MaxSum = 0;
+    for (int i = 0; i < N; i++)
+    {
+        ThisSum += A[i];
+        if (ThisSum > MaxSum)
+            MaxSum = ThisSum;
+        else if (ThisSum < 0)
+            ThisSum = 0;
+    }
+    return MaxSum;
 }
 int maxsubseqsum4(int A[], int N)
 {
@@ -46,8 +55,8 @@ int maxsubseqsum4(int A[], int N)
 int main()
 {
     clock_t beginning, end;
-    int array[5000];
-    for (int i = 0; i < 5000; i++)
+    int array[7000];
+    for (int i = 0; i < 7000; i++)
     {
         if (i == 0)
         {
@@ -66,13 +75,13 @@ int main()
             array[i] = i * 1;
         }
     }
-    for (int j = 0; j < 5000; j++)        //original array
+    for (int j = 0; j < 7000; j++)        //original array
     {
         std::cout << array[j] << " ";
     }
     std::cout << "\noriginal array" << '\n' <<std::endl;
 //function block
-    int res, num = 5000;
+    int res, num = 7000;
     double duration;
     beginning = clock();
     res = maxsubseqsum1(array, num);
@@ -90,14 +99,14 @@ int main()
     duration = (double)(end - beginning) / CLOCKS_PER_SEC;
     std::cout << "time to do this function2 is " << duration << '\n' <<std::endl;
 //third
-//     beginning = clock();
-//     res = maxsubseqsum3(array, num);
-//     end = clock();
-//     std::cout << "Maxsubseqsum is " << res << '\n';
-//     std::cout << "\n" << '\n' << std::endl;
-//     duration = (double)(end - beginning) / CLOCKS_PER_SEC;
-//     std::cout << "time to do this function3 is " << duration << '\n' <<std::endl;
-// //fourth
+    beginning = clock();
+    res = maxsubseqsum3(array, num);
+    end = clock();
+    std::cout << "Maxsubseqsum is " << res << '\n';
+    std::cout << "\n" << '\n' << std::endl;
+    duration = (double)(end - beginning) / CLOCKS_PER_SEC;
+    std::cout << "time to do this function3 is " << duration << '\n' <<std::endl;
+//fourth
 //     beginning = clock();
 //     res = maxsubseqsum4(array, num);
 //     end = clock();
