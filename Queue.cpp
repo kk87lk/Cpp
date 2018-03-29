@@ -3,38 +3,42 @@
 
 using namespace std;
 #define MaxSize 10
-struct Queue
+struct Queue1
 {
     ElementType Data[MaxSize];
-    int rear = 0; //tail
-    int front = 0;//head
+    int rear;
+    int front;//head
 };
+typedef struct Queue1 *Queue;
 class QueueSequence
 {
     private:
-        bool IsFull(Queue* Q)
+        bool IsFull(Queue Q)
         {
             if (Q->rear == MaxSize)
                 return true;
             else
                 return false;
         }
-        bool IsEmpty(Queue* Q)
+        bool IsEmpty(Queue Q)
         {
-            if (Q->rear == 0)
+            if (Q->rear == Q->front)
                 return true;
             else
                 return false;
         }
 
     public:
-        Queue *Creat(Queue* Q)
+        Queue *Creat(Queue &Q)
         {
-            Q = (Queue *)malloc(sizeof(Queue));
-            return Q;
+            Q = (Queue)malloc(12 * sizeof(int));
+            Q->rear = 0;
+            Q->front = 0;
+            getchar();
+            return &Q;
         }
 
-        void Add(Queue* Q)
+        void Add(Queue Q)
         {
             if (IsFull(Q) == true)
             {
@@ -42,12 +46,14 @@ class QueueSequence
                 return;
             }
             else
-                {cin >> Q->Data[Q->rear];
+                {
+                    cin >> Q->Data[Q->rear];
                     (Q->rear)++;
                 }
+            getchar();
         }
 
-        void Delete(Queue* Q)
+        void Delete(Queue Q)
         {
             if (IsEmpty(Q) == true)
             {
@@ -56,28 +62,33 @@ class QueueSequence
             }
             else
                 cout << Q->Data[(Q->front)++] << endl;
+            getchar();
         }
 
-        void Output(Queue* Q)
+        void Output(Queue Q)
         {
             if (IsEmpty(Q) == true)
             {
                 cout << "Empty" << '\n';
+                getchar();
+                getchar();
                 return;
             }
             else
             {
-                for(int co = Q->front; co <= Q->rear; co++)
+                for(int co = Q->front; co < Q->rear; co++)
                 {
                     cout << co << " " << Q->Data[co] << '\n';
                 }
+                getchar();
             }
+            getchar();
         }
 };
 int main()
 {
     QueueSequence q;
-    struct Queue *Q;
+    Queue Q;
     int op = -1;
     while(op != 0)
     {

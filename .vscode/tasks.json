@@ -17,8 +17,8 @@
                 "-g", // 生成和调试有关的信息
                 "-Wall", // 开启额外警告
                 "-static-libgcc", // 静态链接
-                "-fcolor-diagnostics",
-                "-target=x86_64-w64-mingw", // 默认target为msvc，不加这一条就会找不到头文件
+                // "-fcolor-diagnostics",
+                // "-target=x86_64-w64-mingw", // 默认target为msvc，不加这一条就会找不到头文件
                 "-std=c++17" // C语言最新标准为c11，或根据自己的需要进行修改
             ], // 编译命令参数
             "type": "shell",
