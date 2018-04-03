@@ -50,18 +50,19 @@ void Insert(ElementType X, int i, List PtrL)
       PtrL->Last++;
       return;
 }
-void Delete(int i, List PtrL)
+ElementType Delete(int i, List PtrL)
 {
       int j = 0;
+      ElementType x = PtrL->Data[i];
       if (i < 1 || i > PtrL->Last + 1)
       {
             cout << "The element " << i << " doesn't exist." << endl;
-            return;
+            return 0;
       }
       for(j = i;j <= PtrL->Last; j++)
             PtrL->Data[j - 1] = PtrL->Data[j];
       PtrL->Last--;
-      return;
+      return x;
 }
 void Display(List PtrL)
 {
