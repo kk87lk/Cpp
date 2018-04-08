@@ -1,5 +1,5 @@
 #include <iostream>
-#include <malloc.h>
+
 #define ElementType int
 
 using namespace std;
@@ -32,7 +32,7 @@ class QueueSequence
     public:
         Queue *Creat(Queue &Q)
         {
-            Q = (Queue)malloc(12 * sizeof(int));
+            Q = new int[12];
             Q->rear = 0;
             Q->front = 0;
             getchar();
