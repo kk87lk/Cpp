@@ -26,8 +26,8 @@ private:
 public:
     static StackList creat(int MaxSize)
     {
-        StackList L = (StackList)malloc(sizeof(struct SNode));
-        L->Data = (ElementType *)malloc(MaxSize * sizeof(ElementType));
+        StackList L = new struct SNode;
+        L->Data = new ElementType[MaxSize];
         L->Top = -1;
         L->MaxSize = MaxSize;
         return L;
