@@ -1,5 +1,5 @@
 #include <iostream>
-#include <malloc.h>
+
 using namespace std;
 
 typedef int ElementType;
