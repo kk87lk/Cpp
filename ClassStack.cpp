@@ -3,11 +3,9 @@
 
 using namespace std;
 
-typedef int ElementType;
-
 struct SNode
     {
-      ElementType *Data;
+      int *Data;
       int MaxSize;
       int Top;
     };
@@ -25,12 +23,12 @@ private:
         return (L->Top == -1);
     }
 public:
-    StackList creat(int MaxSize)
+    StackList creat()
     {
         StackList L = new struct SNode;
-        L->Data = new ElementType[MaxSize];
+        L->Data = new int[1000];
         L->Top = -1;
-        L->MaxSize = MaxSize;
+        L->MaxSize = 1000;
         return L;
     }
 
@@ -49,7 +47,7 @@ public:
         L->Top = re;
     }
 
-    bool Push(StackList L, ElementType X)
+    bool Push(StackList L, int X)
     {
         if (CheckFull(L))
         {
@@ -63,7 +61,7 @@ public:
         }
     }
 
-    ElementType Pop (StackList L)
+    int Pop (StackList L)
     {
         if (CheckEmpty(L))
         {
@@ -76,18 +74,55 @@ public:
         }
     }
 };
-int main()
+
+void tran1022(int num)
 {
     Stack S;
     StackList s = NULL;
+    s = S.creat();
+    int Quotient = num, Remainder = -1;
+    while (Quotient != 0)
+    {   
+        Remainder = Quotient % 2;
+        S.Push(s, Remainder);
+        Quotient = Quotient / 2;
+    }
+    cout << "The number " << num << " has been transformed into (";
+    while (s->Top != -1)
+    {
+        cout << s->Data[--(s->Top)];
+    }
+    cout << ")B" << '\n';
+}
+
+void tran1028(int num)
+{
+    Stack S;
+    StackList s = NULL;
+    s = S.creat();
+    int Quotient = num, Remainder = -1;
+    while (Quotient != 0)
+    {   
+        Remainder = Quotient % 8;
+        S.Push(s, Remainder);
+        Quotient = Quotient / 8;
+    }
+    cout << "The number " << num << " has been transformed into (";
+    while (s->Top != -1)
+    {
+        cout << s->Data[--(s->Top)];
+    }
+    cout << ")8" << '\n';
+}
+
+int  main()
+{
     int i = -1;
     while (i != 0)
     {
         system("cls");
-        cout << "1--Creat one stacklist." << endl;
-        cout << "2--Push stack." << endl;
-        cout << "3--Pop stack&print." << endl;
-        cout << "4--Print stack." << endl;
+        cout << "1--10 to 2." << endl;
+        cout << "2--10 to 8." << endl;
         cout << "0--Exit." << endl;
         cin >> i;
         switch(i)
@@ -95,11 +130,11 @@ int main()
             case 1:
             {
                 system("cls");
-                int Size;
-                cout << "Input how many elements you want to store into the Stack:";
-                cin >> Size;
-                s = S.creat(Size); //Maxsize == Size
-                cout << "Successful created.";
+                int num;
+                cout << "Input the number:";
+                cin >> num;
+                tran1022(num);
+                cout << "Successful transformed.";
                 fflush(stdin);
                 getchar();
                 break;
@@ -107,31 +142,11 @@ int main()
             case 2:
             {
                 system("cls");
-                ElementType m;
-                cout << "Input the value you want to insert into the Stack:";
-                cin >> m;
-                S.Push(s, m); //Push Element-m into the Stack
-                cout << "Successful inserted.";
-                fflush(stdin);
-                getchar();
-                break;
-            }
-            case 3:
-            {
-                system("cls");
-                ElementType value;
-                value = S.Pop(s);//Print the top data
-                cout << value << endl;
-                cout << "Successful outputed.";
-                fflush(stdin);
-                getchar();
-                break;
-            }
-            case 4:
-            {
-                system("cls");
-                S.outputStack(s);
-                cout << "Successful outputed.";
+                int num;
+                cout << "Input the number:";
+                cin >> num;
+                tran1028(num);
+                cout << "Successful transformed.";
                 fflush(stdin);
                 getchar();
                 break;

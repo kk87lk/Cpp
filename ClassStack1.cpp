@@ -76,3 +76,11 @@ public:
         }
     }
 };
+int  main()
+{
+    int se = 3;
+    while (se == 3)
+    {
+        cout << "Input the function you want to choose:" << '\n';
+        cin << se;
+}
