@@ -33,6 +33,19 @@ public:
         return L;
     }
 
+    bool outputStack(StackList L)
+    {
+        if (CheckEmpty(L))
+        {
+            cout << "Empty stack!" << endl;
+            return false;
+        }
+        for (; L->Top > -1; L->Top--)
+        {
+            cout << "No." << L->Top << "is" << L->Data << endl;
+        }
+    }
+
     bool Push(StackList L, ElementType X)
     {
         if (CheckFull(L))
