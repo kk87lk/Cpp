@@ -24,7 +24,7 @@ private:
         return (L->Top == -1);
     }
 public:
-    static StackList creat(int MaxSize)
+    StackList creat(int MaxSize)
     {
         StackList L = new struct SNode;
         L->Data = new ElementType[MaxSize];
@@ -42,7 +42,7 @@ public:
         }
         for (; L->Top > -1; L->Top--)
         {
-            cout << "No." << L->Top << "is" << L->Data << endl;
+            cout << "No." << L->Top + 1 << "is" << *(L->Data) << endl;
         }
     }
 
@@ -84,6 +84,7 @@ int main()
         cout << "1--Creat one stacklist." << endl;
         cout << "2--Push stack." << endl;
         cout << "3--Pop stack&print." << endl;
+        cout << "4--Print stack." << endl;
         cout << "0--Exit." << endl;
         cin >> i;
         switch(i)
@@ -118,6 +119,15 @@ int main()
                 int value;
                 value = S.Pop(s);//Print the top data
                 cout << value << endl;
+                cout << "Successful outputed.";
+                fflush(stdin);
+                getchar();
+                break;
+            }
+            case 4:
+            {
+                system("cls");
+                outputStack(s);
                 cout << "Successful outputed.";
                 fflush(stdin);
                 getchar();
