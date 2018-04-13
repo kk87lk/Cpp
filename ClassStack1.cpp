@@ -81,23 +81,38 @@ void tran1022(int num)
     StackList s = NULL;
     s = S.creat();
     int Quotient = num, Remainder = -1;
-    while (Quotient == 0)
+    while (Quotient != 0)
     {   
         Remainder = Quotient % 2;
         S.Push(s, Remainder);
         Quotient = Quotient / 2;
     }
     cout << "The number " << num << " has been transformed into (";
-    while (s->Top > -2)
+    while (s->Top != -1)
     {
-        cout << s->Data;
+        cout << s->Data[--(s->Top)];
     }
     cout << ")B" << '\n';
 }
 
 void tran1028(int num)
 {
-    
+    Stack S;
+    StackList s = NULL;
+    s = S.creat();
+    int Quotient = num, Remainder = -1;
+    while (Quotient != 0)
+    {   
+        Remainder = Quotient % 8;
+        S.Push(s, Remainder);
+        Quotient = Quotient / 8;
+    }
+    cout << "The number " << num << " has been transformed into (";
+    while (s->Top != -1)
+    {
+        cout << s->Data[--(s->Top)];
+    }
+    cout << ")8" << '\n';
 }
 
 int  main()
@@ -130,7 +145,7 @@ int  main()
                 int num;
                 cout << "Input the number:";
                 cin >> num;
-                //function 8
+                tran1028(num);
                 cout << "Successful transformed.";
                 fflush(stdin);
                 getchar();
