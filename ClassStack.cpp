@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -40,10 +41,12 @@ public:
             cout << "Empty stack!" << endl;
             return false;
         }
-        for (; L->Top > -1; L->Top--)
+        int re = L->Top;
+        for (; L->Top > -1; )
         {
-            cout << "No." << L->Top + 1 << "is" << *(L->Data) << endl;
+            cout << "No." << L->Top + 1 << "is" << L->Data[--(L->Top)] << endl;
         }
+        L->Top = re;
     }
 
     bool Push(StackList L, ElementType X)
@@ -55,7 +58,7 @@ public:
         }
         else
         {
-            L->Data[++(L->Top)] = X;
+            L->Data[(L->Top)++] = X;
             return true;
         }
     }
@@ -69,7 +72,7 @@ public:
         }
         else
         {
-            return L->Data[(L->Top)--];
+            return L->Data[--(L->Top)];
         }
     }
 };
@@ -116,7 +119,7 @@ int main()
             case 3:
             {
                 system("cls");
-                int value;
+                ElementType value;
                 value = S.Pop(s);//Print the top data
                 cout << value << endl;
                 cout << "Successful outputed.";
@@ -127,7 +130,7 @@ int main()
             case 4:
             {
                 system("cls");
-                outputStack(s);
+                S.outputStack(s);
                 cout << "Successful outputed.";
                 fflush(stdin);
                 getchar();
@@ -146,21 +149,3 @@ int main()
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
