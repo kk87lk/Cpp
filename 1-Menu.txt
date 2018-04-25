@@ -1,0 +1,41 @@
+int i = -1;
+    while (i != 0)
+    {
+        system("cls");
+        cout << "1--function." << endl;
+        cout << "2--function." << endl;
+        cout << "0--Exit." << endl;
+        cin >> i;
+        switch(i)
+        {
+            case 1:
+            {
+                system("cls");
+                fflush(stdin);
+                getchar();
+                break;
+            }
+            case 2:
+            {
+                system("cls");
+                int num;
+                cout << "Input the number:";
+                cin >> num;
+                tran1028(num);
+                cout << "Successful transformed.";
+                fflush(stdin);
+                getchar();
+                break;
+            }
+            case 0:
+            {
+                return 0;
+            }
+            default:
+                system("cls");
+                cout << "Error option." << endl;
+                fflush(stdin);
+                getchar();
+                break;
+        }
+    }
