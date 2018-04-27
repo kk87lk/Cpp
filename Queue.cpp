@@ -97,9 +97,6 @@ int main()
                 cout << "Wrong option.";
         }
     }
-    
-    
-
 }
 //creatqueue
 //isfull q
