@@ -36,17 +36,23 @@ class str
         {
             int ml = MainStr.length, sl = SubStr.length;
             queue<int> q1(ml);
+            int reco;
             for (int i = 1; i <= ml - sl; i++)
             {
-                if ( match(MainStr, StrToBeReplaced, i) != 0)
-                    q1.push(i);
+                reco = match(MainStr, StrToBeReplaced, i);
+                if ( reco != 0)
+                    {
+                        q1.push(reco);
+                        i = i + sl - 1;
+                    }
+                else 
             }
         }
         void insert(string MainStr, string StrToBeInserted)
         {
-
+            
         }
-        char *takeout(char *MainStr, int n)
+        char *takeout(string MainStr, int n)
         {
             
         }
