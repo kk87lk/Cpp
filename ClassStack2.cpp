@@ -67,22 +67,22 @@ public:
     }
 };
 
-bool judge(char st2[])
+bool judge(char st2[], char st1[])
 {
     Stack S;
     StackList s = NULL;
     s = S.creat();
     char com;
     int c = 0;
-    while(st2[c] != '@')
+    while(st2[c] != '@' && st2[c] != '\0')
     {
         S.Push(s, st2[c]);
         c++;
     }
-    while(st2[c] != '\0')
+    while(st1[c + 1] != '@')
     {
         com = S.Pop(s);
-        if(com != st2[c + 1])
+        if(com != st1[c + 1])
             return false;
         c++;
     }
@@ -103,7 +103,7 @@ int main()
         i++;
     }
     st2[i] = '\0';
-    int flag = judge(st2);
+    int flag = judge(st2, st);
     if (flag == true)
         cout << "Yes";
     else
