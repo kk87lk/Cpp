@@ -16,7 +16,7 @@ class QueueSequence
     private:
         bool IsFull(Queue Q)
         {
-            if (Q->rear == MaxSize)
+            if ((Q->rear) - MaxSize == Q->front)
                 return true;
             else
                 return false;
@@ -32,7 +32,7 @@ class QueueSequence
     public:
         Queue *Creat(Queue &Q)
         {
-            Q = new int[12];
+            Q = new Queue1;
             Q->rear = 0;
             Q->front = 0;
             getchar();
@@ -44,6 +44,7 @@ class QueueSequence
             if (IsFull(Q) == true)
             {
                 cout << "Full" << '\n';
+                system("pause");
                 return;
             }
             else
@@ -51,7 +52,7 @@ class QueueSequence
                     cin >> Q->Data[Q->rear];
                     (Q->rear)++;
                 }
-            getchar();
+            system("pause");
         }
 
         void Delete(Queue Q)
@@ -63,27 +64,7 @@ class QueueSequence
             }
             else
                 cout << Q->Data[(Q->front)++] << endl;
-            getchar();
-        }
-
-        void Output(Queue Q)
-        {
-            if (IsEmpty(Q) == true)
-            {
-                cout << "Empty" << '\n';
-                getchar();
-                getchar();
-                return;
-            }
-            else
-            {
-                for(int co = Q->front; co < Q->rear; co++)
-                {
-                    cout << co << " " << Q->Data[co] << '\n';
-                }
-                getchar();
-            }
-            getchar();
+            system("pause");
         }
 };
 int main()
@@ -97,7 +78,6 @@ int main()
         cout << "1-creat." << endl;
         cout << "2-add." << endl;
         cout << "3-delete." << endl;
-        cout << "4-output" << endl;
         cout << "0-exit." << endl;
         cin >> op;
         switch (op)
@@ -112,9 +92,6 @@ int main()
                 break;} 
             case 3:
                {q.Delete(Q);
-                break;} 
-            case 4:
-               {q.Output(Q);
                 break;}  
             default:
                 cout << "Wrong option.";
