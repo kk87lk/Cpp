@@ -1,13 +1,22 @@
 #include <iostream>
-#include <malloc.h>
+#include <memory>
 #define ElementType int
 
 using namespace std;
 
-class Tree
+typedef struct TreeNode *BinaryTree;
+typedef BinaryTree Position;
+
+struct TreeNode
+{
+    ElementType Data;
+    BinaryTree left;
+    BinaryTree right;
+};
+class BinaryTree
 {
 private:
 
 public:
-    Tree *CreatTree(T,)
+    Tree *CreatTree(T, )
 };
