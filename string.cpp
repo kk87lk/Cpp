@@ -90,6 +90,7 @@ class str
             }
         }
     }
+    
     void insert(String *MainStr, String StrToBeInserted, int pos)
     {
         int len = (*MainStr).length();
@@ -103,9 +104,10 @@ class str
         system("pause");
         return;
     }
-    char takeout(String MainStr, int pos, int num)
+    
+    char Takeout1(String MainStr, int pos, int num)
     {
-        char SubStr[100];
+        char SubStr[1000];
         for (int i = 0; i < num; i++)
             SubStr[i] = MainStr.unit.String[pos + i];
         return *SubStr;
@@ -114,18 +116,7 @@ class str
 
 int main()
 {
-    String a;
-    String b;
-    String c;
-    cin >> a.unit.String;
-    cin >> b.unit.String;
-    // cin >> c.unit.String;
-
-    s.insert(&a, b, 5);
-    cout << "\n"
-         << a.unit.String;
-
-    int op = -1;
+	int op = -1;
     while (op != 0)
     {
         system("cls");
@@ -153,7 +144,7 @@ int main()
             cin >> c.unit.String;
             s.replace(&a, b, c);
             cout << "\nReplace success!\nThe main string now is:";
-            cout << a;
+            cout << a.unit.String;
             break;
         }
         case 2:
@@ -172,14 +163,12 @@ int main()
             cin >> b.unit.String;
             s.insert(&a, b, pos);
             cout << "\nReplace success!\nThe main string now is:";
-            cout << a;
+            cout << a.unit.String;
             break;
         }
         case 3:
         {
             String a;
-            String b;
-            String c;
             str s;
             system("cls");
             cout << "Type in the main string:";
@@ -190,7 +179,7 @@ int main()
             int num;
             cout << "\nType in how many types you want to takeout:";
             cin >> num;
-            b.unit.String = s.takeout(&a, pos, num);
+            const char b = s.Takeout1(&a, pos, num);
             cout << "\nReplace success!\nThe main string now is:";
             cout << b.unit.String;
             break;
