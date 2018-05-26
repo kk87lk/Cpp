@@ -90,7 +90,13 @@ class str
             }
         }
     }
-    
+    String Takeout(String MainStr, int pos, int num)
+    {
+        String SubStr;
+        for (int i = 0; i < num; i++)
+            SubStr.unit.String[i] = MainStr.unit.String[pos + i];
+        return SubStr;
+    }
     void insert(String *MainStr, String StrToBeInserted, int pos)
     {
         int len = (*MainStr).length();
@@ -104,19 +110,11 @@ class str
         system("pause");
         return;
     }
-    
-    char Takeout1(String MainStr, int pos, int num)
-    {
-        char SubStr[1000];
-        for (int i = 0; i < num; i++)
-            SubStr[i] = MainStr.unit.String[pos + i];
-        return *SubStr;
-    }
 };
 
 int main()
 {
-	int op = -1;
+    int op = -1;
     while (op != 0)
     {
         system("cls");
@@ -179,9 +177,10 @@ int main()
             int num;
             cout << "\nType in how many types you want to takeout:";
             cin >> num;
-            const char b = s.Takeout1(&a, pos, num);
-            cout << "\nReplace success!\nThe main string now is:";
+            String b = s.Takeout(a, pos - 1, num);
+            cout << "\nTakeout success!\nThe substring now is:";
             cout << b.unit.String;
+            system("pause");
             break;
         }
         default:
