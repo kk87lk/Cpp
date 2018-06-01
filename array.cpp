@@ -3,38 +3,38 @@ using namespace std;
 typedef int Etype;
 typedef struct OLnode
 {
-    int i, j;                    /* ĞĞºÅ¡¢ÁĞºÅÓò */
-    Etype e;                     /*  Êı¾İÓò      */
-    struct OLnode *right, *down; /* ĞĞÏòµÄ¡¢ÁĞÏòµÄÖ¸ÕëÓò */
-} OLnode, *OLink;                /* Êı¾İÔªËØ½áµãÀàĞÍ  */
+    int i, j;                    /* è¡Œå·ã€åˆ—å·åŸŸ */
+    Etype e;                     /*  æ•°æ®åŸŸ      */
+    struct OLnode *right, *down; /* è¡Œå‘çš„ã€åˆ—å‘çš„æŒ‡é’ˆåŸŸ */
+} OLnode, *OLink;                /* æ•°æ®å…ƒç´ ç»“ç‚¹ç±»å‹  */
 typedef struct
 {
     OLink *rh, *ch;
     int mu, nu, tu;
-} Crosslist; /* Ê®×ÖÁ´±íĞĞ¡¢ÁĞ±íÍ·  */
-/* º¯ÊıÉùÃ÷ */
+} Crosslist; /* åå­—é“¾è¡¨è¡Œã€åˆ—è¡¨å¤´  */
+/* å‡½æ•°å£°æ˜ */
 void creatMatrix(Crosslist *M);
 void out_M(Crosslist M);
 void search_M(Crosslist *M, Etype x);
 void query_M(Crosslist M, int row, int col);
 Crosslist ma, mb, mr;
 int z;
-/*  Ö÷º¯Êı */
+/*  ä¸»å‡½æ•° */
 int main()
 {
     creatMatrix(&ma);
     out_M(ma);
 } /* main */
-/* Ê®×ÖÁ´±íµÄÊä³ö  */
+/* åå­—é“¾è¡¨çš„è¾“å‡º  */
 void out_M(Crosslist M)
 {
     int i;
     OLnode *p;
-    /*  Êä³ö¾ØÕóµÄ×ÜĞĞÊı¡¢×ÜÁĞÊı¡¢·ÇÁãÔªËØ×Ü¸öÊı */
+    /*  è¾“å‡ºçŸ©é˜µçš„æ€»è¡Œæ•°ã€æ€»åˆ—æ•°ã€éé›¶å…ƒç´ æ€»ä¸ªæ•° */
     cout << "\n  m=" << M.mu << "   n=" << M.nu << "   t=" << M.tu << "\n";
     for (i = 1; i <= M.mu; i++)
     {
-        p = M.rh[i]; /*  Ö¸ÏòµÚiĞĞ */
+        p = M.rh[i]; /*  æŒ‡å‘ç¬¬iè¡Œ */
         if (p)
         {
             cout << "\n i=" << i;
@@ -61,7 +61,7 @@ void creatMatrix(Crosslist *M)
     int m, n, t, row, col, i, j;
     Etype va;
     OLnode *p, *q, *s;
-    /*  ÊäÈë¾ØÕóµÄ×ÜĞĞÊı¡¢×ÜÁĞÊı¡¢·ÇÁãÔªËØ×Ü¸öÊı */
+    /*  è¾“å…¥çŸ©é˜µçš„æ€»è¡Œæ•°ã€æ€»åˆ—æ•°ã€éé›¶å…ƒç´ æ€»ä¸ªæ•° */
     cout << "\n  m n t=";
     cin >> m >> n >> t;
     M->rh = (OLink *)::operator new((m + 1) * sizeof(OLink));
@@ -76,8 +76,8 @@ void creatMatrix(Crosslist *M)
         M->ch[j] = NULL;
     M->mu = m;
     M->nu = n;
-    M->tu = t; /*  ½¨Á¢³É¿ÕÊ®×ÖÁ´±í  */
-    /* ÒÔÏÂÎª·ÇÁãÔªËØµÄÖğÒ»ÊäÈëºÍ²åÈë */
+    M->tu = t; /*  å»ºç«‹æˆç©ºåå­—é“¾è¡¨  */
+    /* ä»¥ä¸‹ä¸ºéé›¶å…ƒç´ çš„é€ä¸€è¾“å…¥å’Œæ’å…¥ */
     for (i = 1; i <= M->tu; i++)
     {
         cout << "\n i j e =";
@@ -86,7 +86,7 @@ void creatMatrix(Crosslist *M)
         p->i = row;
         p->j = col;
         p->e = va;
-        /*  ÔÚµÚrowĞĞÉÏÁ´½Ó */
+        /*  åœ¨ç¬¬rowè¡Œä¸Šé“¾æ¥ */
         q = M->rh[row];
         s = q;
         while (q != NULL && q->j < col)
@@ -99,7 +99,7 @@ void creatMatrix(Crosslist *M)
             M->rh[row] = p;
         else
             s->right = p;
-        /* ÔÚµÚcolÁĞÉÏÁ´½Ó    */
+        /* åœ¨ç¬¬colåˆ—ä¸Šé“¾æ¥    */
         q = M->ch[col];
         while (q && q->i < row)
         {
@@ -115,7 +115,50 @@ void creatMatrix(Crosslist *M)
 } /* creatMatrix */
 void search_M(Crosslist *M, Etype x)
 {
+    for (int i = 0; i < M->mu; i++)
+    {
+        for (int j = 0;;)
+        {
+            p = M->rh[i];
+            if (p->e == x)
+            {
+                p = p->right;
+                j++;
+            }
+            else
+            {
+                cout << "row:" << i << "col:" << j;
+            }
+        }
+    }
+    return;
 }
 void query_M(Crosslist M, int row, int col)
 {
+    // if((row > M.mu || row < 0) || (col > M.nu || col < 0))
+    // {
+    //     cout << "Invalid input.";
+    //     return;
+    // }
+    // for (int i = 0; i < row; i++)
+    //     M = M.down;
+    // for (int j = 0; j < col; j++)
+    //     M = M.right;
+    OLnode *p;
+    p = M.rh[row];
+    for (int j = 0; j < col; j++)
+        p = p->right;
+    cout << '\n'
+         << p->e;
 }
+
+    //--------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+typedef int Etype;
+typedef struct TripleTable
+{
+    int col, row; /* è¡Œå·ã€åˆ—å·åŸŸ */
+    Etype e;      /*  æ•°æ®åŸŸ      */
+} TriTable;
