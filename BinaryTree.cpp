@@ -117,12 +117,14 @@ int Max(int a, int b)
 }
 int Depth(BiTNode *p)
 {
-	int d = 0, depth_R, depth_L;
-	if (p)
+	int d = -1, depth_R = -1, depth_L = -1;
+	if (!p)
 		return 0;
-	depth_L = Depth(p->leftchild);
-	depth_R = Depth(p->rightchild);
-	d = max(depth_L, depth_R);
+	if (p->leftchild)
+		depth_L = Depth(p->leftchild);
+	if (p->rightchild)
+		depth_R = Depth(p->rightchild);
+	d = Max(depth_L, depth_R);
 	return d + 1;
 }
 
