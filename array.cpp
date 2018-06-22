@@ -3,38 +3,38 @@ using namespace std;
 typedef int Etype;
 typedef struct OLnode
 {
-    int i, j;                    /* 行号、列号域 */
-    Etype e;                     /*  数据域      */
-    struct OLnode *right, *down; /* 行向的、列向的指针域 */
-} OLnode, *OLink;                /* 数据元素结点类型  */
+    int i, j;
+    Etype e;
+    struct OLnode *right, *down;
+} OLnode, *OLink;
 typedef struct
 {
     OLink *rh, *ch;
-    int mu, nu, tu;
-} Crosslist; /* 十字链表行、列表头  */
-/* 函数声明 */
+    int norow, nocol, noe;
+} Crosslist;
 void creatMatrix(Crosslist *M);
 void out_M(Crosslist M);
-void search_M(Crosslist *M, Etype x);
+void search_M(Crosslist *M);
 void query_M(Crosslist M, int row, int col);
 Crosslist ma, mb, mr;
 int z;
-/*  主函数 */
 int main()
 {
     creatMatrix(&ma);
-    out_M(ma);
-} /* main */
-/* 十字链表的输出  */
+    search_M(&ma);
+    cout << "Input the row and col of element you want to query:";
+    int m = 0, n = 0;
+    cin >> m >> n;
+    query_M(ma, m, n);
+}
 void out_M(Crosslist M)
 {
     int i;
     OLnode *p;
-    /*  输出矩阵的总行数、总列数、非零元素总个数 */
-    cout << "\n  m=" << M.mu << "   n=" << M.nu << "   t=" << M.tu << "\n";
-    for (i = 1; i <= M.mu; i++)
+    cout << "\n  m=" << M.norow << "   n=" << M.nocol << "   t=" << M.noe << "\n";
+    for (i = 1; i <= M.norow; i++)
     {
-        p = M.rh[i]; /*  指向第i行 */
+        p = M.rh[i];
         if (p)
         {
             cout << "\n i=" << i;
@@ -53,7 +53,6 @@ void out_M(Crosslist M)
         }
         cout << "\n";
     }
-    system("cls");
 }
 
 void creatMatrix(Crosslist *M)
@@ -61,7 +60,6 @@ void creatMatrix(Crosslist *M)
     int m, n, t, row, col, i, j;
     Etype va;
     OLnode *p, *q, *s;
-    /*  输入矩阵的总行数、总列数、非零元素总个数 */
     cout << "\n  m n t=";
     cin >> m >> n >> t;
     M->rh = (OLink *)::operator new((m + 1) * sizeof(OLink));
@@ -74,11 +72,10 @@ void creatMatrix(Crosslist *M)
         M->rh[i] = NULL;
     for (j = 1; j <= n; j++)
         M->ch[j] = NULL;
-    M->mu = m;
-    M->nu = n;
-    M->tu = t; /*  建立成空十字链表  */
-    /* 以下为非零元素的逐一输入和插入 */
-    for (i = 1; i <= M->tu; i++)
+    M->norow = m;
+    M->nocol = n;
+    M->noe = t;
+    for (i = 1; i <= M->noe; i++)
     {
         cout << "\n i j e =";
         cin >> row >> col >> va;
@@ -86,7 +83,6 @@ void creatMatrix(Crosslist *M)
         p->i = row;
         p->j = col;
         p->e = va;
-        /*  在第row行上链接 */
         q = M->rh[row];
         s = q;
         while (q != NULL && q->j < col)
@@ -99,7 +95,6 @@ void creatMatrix(Crosslist *M)
             M->rh[row] = p;
         else
             s->right = p;
-        /* 在第col列上链接    */
         q = M->ch[col];
         while (q && q->i < row)
         {
@@ -111,54 +106,51 @@ void creatMatrix(Crosslist *M)
             M->ch[col] = p;
         else
             s->down = p;
-    } /* for */
-} /* creatMatrix */
-void search_M(Crosslist *M, Etype x)
+    }
+}
+void search_M(Crosslist *M)
 {
-    for (int i = 0; i < M->mu; i++)
+    Etype x;
+    cout << "Input the data you want to search:";
+    cin >> x;
+    OLnode *p;
+    for (int i = 1; i <= M->norow; i++)
     {
-        for (int j = 0;;)
+        p = M->rh[i];
+        if (p)
         {
-            p = M->rh[i];
-            if (p->e == x)
+            while (p)
             {
+                if (p->e == x)
+                {
+                    cout << "   (";
+                    cout.width(3);
+                    cout << p->i;
+                    cout.width(3);
+                    cout << p->j;
+                    cout << ")";
+                }
                 p = p->right;
-                j++;
-            }
-            else
-            {
-                cout << "row:" << i << "col:" << j;
             }
         }
+        cout << "\n";
     }
     return;
 }
 void query_M(Crosslist M, int row, int col)
 {
-    // if((row > M.mu || row < 0) || (col > M.nu || col < 0))
-    // {
-    //     cout << "Invalid input.";
-    //     return;
-    // }
-    // for (int i = 0; i < row; i++)
-    //     M = M.down;
-    // for (int j = 0; j < col; j++)
-    //     M = M.right;
     OLnode *p;
-    p = M.rh[row];
-    for (int j = 0; j < col; j++)
-        p = p->right;
-    cout << '\n'
-         << p->e;
+    for (int i = 1; i <= M.norow; i++)
+    {
+        p = M.rh[i];
+        if (p)
+        {
+            while (p)
+            {
+                if (row == p->i && col == p->j)
+                    cout << p->e;
+                p = p->right;
+            }
+        }
+    }
 }
-
-    //--------------------------------------------------------------
-
-#include <iostream>
-using namespace std;
-typedef int Etype;
-typedef struct TripleTable
-{
-    int col, row; /* 行号、列号域 */
-    Etype e;      /*  数据域      */
-} TriTable;
