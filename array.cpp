@@ -5,14 +5,14 @@ typedef struct TriTable
     int row = 0;
     int col = 0;
     int data = 0;
-} TriTab[100];
+};
 void creat(TriTable *TriTab)
 {
     for (int i = 0; i < 100; i++)
     {
-        cout << "Enter the row, col and data(Enter -1 to exit):";
+        cout << "Enter the row, col and data(Enter row = 0 to exit):";
         cin >> TriTab[i].row;
-        if (TriTab[i].row == -1)
+        if (TriTab[i].row == 0)
             break;
         cin >> TriTab[i].col;
         cin >> TriTab[i].data;
@@ -21,17 +21,43 @@ void creat(TriTable *TriTab)
 }
 void output(TriTable *TriTab)
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; TriTab[i].row != 0 || i == 99; i++)
     {
         cout << "row, col and data:";
-        cout << TriTab[i].row << " " << TriTab[i].col << " " << TriTab[i].data;
+        cout << TriTab[i].row << " " << TriTab[i].col << " " << TriTab[i].data << "\n";
     }
     return;
 }
+void transpose(TriTable *TriTab)
+{
+    int i = 0;
+    TriTable TriTab2[100];
+    while (TriTab[i].row != 0)
+    {
+        TriTab2[i].row = TriTab[i].col;
+        TriTab2[i].col = TriTab[i].row;
+        TriTab2[i].data = TriTab[i].data;
+        i++;
+    }
+    output(TriTab2);
+}
+int cmp(TriTable *first, int f, TriTable *second, int s)
+{
+    while ()
+}
+TriTable *add(TriTable *first, TriTable *second)
+{
+    TriTable re[100];
+    int flag = 0, f = 0, s = 0;
+
+    return re;
+}
 int main()
 {
-    TriTable TriTab[100];
-    creat(TriTab);
+    TriTable TriTab1[100];
+    creat(TriTab1);
+    output(TriTab1);
+    transpose(TriTab1);
 }
 
 // typedef int Etype;
