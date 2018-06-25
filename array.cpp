@@ -43,7 +43,11 @@ void transpose(TriTable *TriTab)
 }
 int cmp(TriTable *first, int f, TriTable *second, int s)
 {
-    while ()
+    while (first[f].row != 0 && first[f].row != second[s].row)
+        if (second[s].row == 0)
+            return 0;
+        else
+            s++;
 }
 TriTable *add(TriTable *first, TriTable *second)
 {
@@ -214,3 +218,67 @@ int main()
 //         }
 //     }
 // }
+
+int maze[SIZE][SIZE] =
+    {
+        {1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 1, 0, 1, 1},
+        {1, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1}};
+typedef struct
+{
+    int X;
+    int y;
+} Direction;
+Direction Move[5] = {{0, 0}, {0, 1}, {1, 0}, {0, -1}};
+typedef struct
+{
+    int row;
+    int column;
+    int direction;
+} SElemType;
+typedef SElemType elemtype;
+int path(SequenStack s.int Maze[ SIZEJ[SIZEJ],Direction MoveC5)
+{
+    SElemType temp;
+    SElemType tryPath;
+    int x, y, d, i, j, tryTime;
+    temp.row = 1;
+    temp.column = 1;
+    temp.direction一O;
+    Push_ SequenStack(s, temp);
+    while (!SequenStack Empty(s))
+        GetTop_ SequenStack(s, &.temp);
+    X = temp.row;
+    y = temp.column;
+    d = temp.direction + 1;
+    tryTime = 0;
+    while (d < 一4)
+        i = x + Move[d].x;
+    j = y + Move[d].y;
+    if (Maze[i][j] == 0)
+        if (tryTime == 0)
+            Pop_ SequenStack(s, &.tryPath);
+    tryPath.direction = d;
+    Push_ SequenStack(s, tryPath);
+    tryTime++;
+    temp.row = i;
+    temp.column = j;
+    temp.direction = 1;
+    Push_ SequenStack(s.temp);
+    x = i;
+    y = j;
+    Maze[xJ][y] = -1;
+    if (x == SIZE - 2 && y == SIZE - 2)
+        return1;
+    else
+        d = 1;
+}
+else
+{
+    d++;
+    tryTime = 0;
+}
