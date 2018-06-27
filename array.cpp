@@ -41,19 +41,31 @@ void transpose(TriTable *TriTab)
     }
     output(TriTab2);
 }
-int cmp(TriTable *first, int f, TriTable *second, int s)
+int count(TriTable *first, TriTable *second)
 {
-    while (first[f].row != 0 && first[f].row != second[s].row)
-        if (second[s].row == 0)
-            return 0;
-        else
-            s++;
+    int z = 0, y = 0; //z 记录重复元素数
+    for (int i = 0; first[i].row != 0; i++)
+        for (int l = 0; second[l].row != 0; l++)
+        {
+            if (first[i].row == second[l].row)
+                if (first[i].col == second[l].col)
+                    z++;
+        }
 }
 TriTable *add(TriTable *first, TriTable *second)
 {
     TriTable re[100];
     int flag = 0, f = 0, s = 0;
-
+    {
+        while (first[f].row != second[s].row)
+            if (second[s] == 0)
+            {
+                //creat new array ele
+            }
+            else
+                s++;
+        while
+    }
     return re;
 }
 int main()
@@ -62,6 +74,8 @@ int main()
     creat(TriTab1);
     output(TriTab1);
     transpose(TriTab1);
+    creat(TriTab2);
+    TriTable c = add(TriTab1, TriTab2);
 }
 
 // typedef int Etype;
@@ -248,10 +262,10 @@ int path(SequenStack s.int Maze[ SIZEJ[SIZEJ],Direction MoveC5)
     int x, y, d, i, j, tryTime;
     temp.row = 1;
     temp.column = 1;
-    temp.direction一O;
-    Push_ SequenStack(s, temp);
+    temp.direction = O;
+    Push_SequenStack(s, temp);
     while (!SequenStack Empty(s))
-        GetTop_ SequenStack(s, &.temp);
+        GetTop_SequenStack(s, &.temp);
     X = temp.row;
     y = temp.column;
     d = temp.direction + 1;
@@ -261,9 +275,9 @@ int path(SequenStack s.int Maze[ SIZEJ[SIZEJ],Direction MoveC5)
     j = y + Move[d].y;
     if (Maze[i][j] == 0)
         if (tryTime == 0)
-            Pop_ SequenStack(s, &.tryPath);
+            Pop_SequenStack(s, &.tryPath);
     tryPath.direction = d;
-    Push_ SequenStack(s, tryPath);
+    Push_SequenStack(s, tryPath);
     tryTime++;
     temp.row = i;
     temp.column = j;
