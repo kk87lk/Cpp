@@ -43,28 +43,56 @@ void transpose(TriTable *TriTab)
 }
 int count(TriTable *first, TriTable *second)
 {
-    int z = 0, y = 0; //z 记录重复元素数
+    int z = 0, y = 0, x = 0; //z 记录重复元素数
     for (int i = 0; first[i].row != 0; i++)
+    {
         for (int l = 0; second[l].row != 0; l++)
         {
             if (first[i].row == second[l].row)
                 if (first[i].col == second[l].col)
                     z++;
+            y = l;
         }
+        x = i;
+    }
+    return (y + x - z + 1);
 }
 TriTable *add(TriTable *first, TriTable *second)
 {
+    int co = count(first, second);
     TriTable re[100];
-    int flag = 0, f = 0, s = 0;
+    int flag = 0, f = 0, s = 0, r = 0; //flag record
+    for (; first[f] != 0; f++)
     {
         while (first[f].row != second[s].row)
             if (second[s] == 0)
             {
-                //creat new array ele
+                re[co + flag - 1].row = first[f].row;
+                re[co + flag - 1].col = first[f].col;
+                re[co + flag - 1].data = first[f].data;
+                flag++;
             }
             else
                 s++;
-        while
+        while (re[r].row != 0)
+            r++;
+        re[r].row = first[f].row;
+        re[r].col = first[f].col;
+        re[r].data = first[f].data + second[s].data;
+    }
+    for (s = 0, f = 0; second[f] != 0; s++)
+    {
+        while (second[s].row != first[f].row)
+            if (first[f] == 0)
+            {
+                while (re[r].row != 0)
+                    r++;
+                re[r].row = second[s].row;
+                re[r].col = second[s].col;
+                re[r].data = second[s].data;
+            }
+            else
+                f++;
     }
     return re;
 }
@@ -255,7 +283,7 @@ typedef struct
     int direction;
 } SElemType;
 typedef SElemType elemtype;
-int path(SequenStack s.int Maze[ SIZEJ[SIZEJ],Direction MoveC5)
+int path(SequenStack s.int Maze[SIZE][SIZE], Direction MoveC5)
 {
     SElemType temp;
     SElemType tryPath;
